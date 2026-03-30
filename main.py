@@ -1,10 +1,29 @@
-from fastapi import FastAPI, Response, status
+from fastapi import FastAPI, status
+from pydantic import BaseModel
 
-app = FastAPI(title="My API", version="1.0.0")
+class MessageResponse(BaseModel):
+    message: str
 
-@app.get("/", response_model=dict, status_code=status.HTTP_200_OK, summary="Root Endpoint")
-def read_root():
-    """
-    Root endpoint that returns a welcome message.
-    """
-    return {"message": "Welcome to the API."}
+app = FastAPI(
+    title="Professional API",
+    version="0.0.2",
+    description="A more advanced and professional FastAPI application.",
+    contact={
+        "name": "API Support",
+        "email": "support@example.com",
+    },
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
+
+@app.get(
+    "/",
+    response_model=MessageResponse,
+    status_code=status.HTTP_200_OK,
+    summary="Root Endpoint",
+    tags=["Root"],
+    response_description="A welcome message."
+)
+async def read_root() -> MessageResponse:
+    """Root endpoint that returns a professional welcome message."""
+    return MessageResponse(message="Welcome to the Professional API.")
