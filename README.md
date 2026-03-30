@@ -1,4 +1,4 @@
-# myapp
+# Try FastAPI Cloud
 
 A project created with FastAPI CLI.
 
